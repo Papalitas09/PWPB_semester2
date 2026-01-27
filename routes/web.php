@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ReportController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,4 +23,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/warga/dashboard', function () {
         return 'Halo Warga! Ini halaman kamu.';
     })->name('user.dashboard');
+
+    // Rute untuk Warga
+    Route::get('/lapor', [ReportController::class, 'index'])->name('user.lapor');
+    Route::post('/lapor', [ReportController::class, 'store'])->name('user.lapor.store');
 });
