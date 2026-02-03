@@ -16,9 +16,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     // Dashboard Admin
-    Route::get('/admin/dashboard', function () {
-        return view('Admin.dashboard');
-    })->name('admin.dashboard');
+    Route::get('/admin/dashboard', [AuthController::class, 'dashboard'])->name('admin.dashboard');
     // Dashboard Warga (Sementara)
     Route::get('/warga/dashboard', function () {
         return 'Halo Warga! Ini halaman kamu.';

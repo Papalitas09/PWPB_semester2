@@ -38,6 +38,41 @@ control"
                     </form>
                 </div>
             </div>
+            <div class="card mt-4">
+                <div class="card-header bg-success text-white">Riwayat Laporan Saya</div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Tanggal</th>
+                                <th>Judul</th>
+                                <th>Status</th>
+
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            @foreach ($myReports as $item)
+                                <tr>
+                                    <td>{{ $item->created_at->format('d-m-Y') }}</td>
+                                    <td>{{ $item->title }}</td>
+
+                                    <td>
+
+                                        @if ($item->status == '0')
+                                            <span class="badge bg-danger">Menunggu</span>
+                                        @elseif($item->status == 'proses')
+                                            <span class="badge bg-warning">Diproses</span>
+                                        @else
+                                            <span class="badge bg-success">Selesai</span>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

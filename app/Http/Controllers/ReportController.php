@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Report;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 class ReportController extends Controller
 {
     // 1. Menampilkan Form Lapor
     public function index()
     {
-        return view('User.lapor');
+        // LOGIKA: Ambil laporan DIMANA (Where) id pemiliknya == ID saya yangsedang login
+        $myReports = Report::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
+
+        return view('User.lapor', compact('myReports'));
     }
 
     // 2. Memproses Data & Foto (Jantung Materi Hari Ini)
